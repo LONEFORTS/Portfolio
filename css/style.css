@@ -1,5 +1,6 @@
 :root {
     --bg: #050505;
+    --bg-rgb: 5, 5, 5;
     --text: #ffffff;
     --text-secondary: #888888;
     --border: #1a1a1a;
@@ -10,6 +11,7 @@
 
 body.light {
     --bg: #f5f5f7;
+    --bg-rgb: 245, 245, 247;
     --text: #111111;
     --text-secondary: #444444;
     --border: #dddddd;
@@ -63,10 +65,12 @@ h1, h2, h3 {
     font-weight: 600;
     letter-spacing: -0.03em;
 }
+
 .serif {
     font-family: 'Playfair Display', serif;
     font-style: italic;
 }
+
 p {
     color: var(--text-secondary);
     max-width: 65ch;
@@ -81,6 +85,7 @@ nav {
     z-index: 100;
     border-bottom: 1px solid var(--border);
 }
+
 .nav-content {
     display: flex;
     justify-content: space-between;
@@ -90,16 +95,19 @@ nav {
     margin: 0 auto;
     padding: 0 2rem;
 }
+
 .logo {
     font-weight: 700;
     letter-spacing: 0.15em;
     text-decoration: none;
     color: var(--text);
 }
+
 .nav-links {
     display: flex;
     gap: 2.5rem;
 }
+
 .nav-links a {
     text-decoration: none;
     color: var(--text-secondary);
@@ -108,9 +116,11 @@ nav {
     letter-spacing: 0.1em;
     transition: var(--transition);
 }
+
 .nav-links a:hover, .nav-links a.active {
     color: var(--text);
 }
+
 .theme-toggle, .hamburger {
     background: none;
     border: none;
@@ -119,11 +129,13 @@ nav {
     cursor: pointer;
     margin-left: 1rem;
 }
+
 .hamburger {
     display: none;
     flex-direction: column;
     gap: 5px;
 }
+
 .hamburger span {
     width: 22px;
     height: 2px;
@@ -137,18 +149,21 @@ nav {
     display: flex;
     align-items: center;
 }
+
 .hero-grid {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 4rem;
     align-items: center;
 }
+
 .hero-image {
     aspect-ratio: 3/4;
     background: var(--card-bg);
     border: 1px solid var(--border);
     overflow: hidden;
 }
+
 .hero-image img {
     width: 100%;
     height: 100%;
@@ -156,20 +171,24 @@ nav {
     filter: grayscale(100%);
     transition: var(--transition);
 }
+
 .hero-image:hover img {
     filter: grayscale(0%);
 }
+
 .hero-text h1 {
     font-size: 4.5rem;
     line-height: 0.95;
     margin-bottom: 1.5rem;
 }
+
 .motto {
     font-size: 0.9rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--text);
 }
+
 .btn {
     display: inline-block;
     padding: 1rem 2rem;
@@ -180,15 +199,18 @@ nav {
     border: 1px solid var(--border);
     transition: var(--transition);
 }
+
 .btn-primary {
     background: var(--text);
     color: var(--bg);
     border-color: var(--text);
 }
+
 .btn-primary:hover {
     background: transparent;
     color: var(--text);
 }
+
 .btn-secondary:hover {
     border-color: var(--text);
 }
@@ -199,6 +221,7 @@ nav {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 2rem;
 }
+
 .skill-node {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -207,11 +230,16 @@ nav {
     cursor: pointer;
     transition: var(--transition);
 }
+
 .skill-node:hover {
     transform: translateY(-5px);
     border-color: var(--text);
 }
-.skill-node .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+.skill-node .icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
 
 /* Values & Writing */
 .values-grid, .writing-grid {
@@ -219,6 +247,7 @@ nav {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 3rem;
 }
+
 .writing-card {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -226,19 +255,71 @@ nav {
     text-decoration: none;
     transition: var(--transition);
 }
+
 .writing-card:hover {
     transform: translateY(-5px);
     border-color: var(--text);
 }
-.writing-card h3 { color: var(--text); margin-bottom: 1rem; }
+
+.writing-card h3 {
+    color: var(--text);
+    margin-bottom: 1rem;
+}
+
+.value-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 2rem;
+}
+
+.value-item h3 {
+    color: var(--text);
+    margin-bottom: 1rem;
+}
+
+.contact-content {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.contact-links {
+    display: flex;
+    gap: 3rem;
+}
+
 .contact-link {
     font-size: 2rem;
     color: var(--text);
     text-decoration: none;
     border-bottom: 1px solid var(--border);
     transition: var(--transition);
+    padding-bottom: 0.5rem;
 }
-.contact-link:hover { border-color: var(--text); padding-left: 0.5rem; }
+
+.contact-link:hover {
+    border-color: var(--text);
+    padding-left: 0.5rem;
+}
+
+/* Footer */
+footer {
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.footer-text {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
 
 /* Command Palette */
 .command-palette {
@@ -247,7 +328,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(8px);
     z-index: 1000;
     display: flex;
@@ -257,10 +338,12 @@ nav {
     opacity: 0;
     transition: 0.2s;
 }
+
 .command-palette.active {
     visibility: visible;
     opacity: 1;
 }
+
 .command-container {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -269,6 +352,7 @@ nav {
     border-radius: 12px;
     overflow: hidden;
 }
+
 #commandInput {
     width: 100%;
     padding: 1rem;
@@ -278,6 +362,7 @@ nav {
     font-size: 1.1rem;
     outline: none;
 }
+
 .command-suggestions {
     padding: 0.5rem;
     border-top: 1px solid var(--border);
@@ -287,8 +372,14 @@ nav {
 
 /* Mobile */
 @media (max-width: 768px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-text h1 { font-size: 3rem; }
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-text h1 {
+        font-size: 3rem;
+    }
+
     .nav-links {
         display: none;
         position: absolute;
@@ -300,6 +391,22 @@ nav {
         padding: 2rem;
         border-bottom: 1px solid var(--border);
     }
-    .nav-links.active { display: flex; }
-    .hamburger { display: flex; }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .contact-links {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .footer-grid {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }
