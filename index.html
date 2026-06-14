@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Ayush Lone | Engineer & Researcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- 3D Canvas (Three.js) -->
+    <canvas id="bgCanvas" class="three-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">AYUSH LONE</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#values">Values</a>
+                <a href="#writing">Writing</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Dark/Light mode">🌙</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section id="about" class="hero">
+            <div class="hero-grid">
+                <div class="hero-image">
+                    <img src="assets/images/hero.jpg" alt="Ayush Lone">
+                </div>
+                <div class="hero-text">
+                    <p class="motto">Not to Consume — But to Build</p>
+                    <h1>Ayush <span class="serif">Lone</span></h1>
+                    <p class="description">
+                        Computer Engineering student at YB Patil Polytechnic. 
+                        Engineer, Researcher, and Polymath focused on first‑principles AI/ML and Deep Learning systems.
+                    </p>
+                    <div class="cta-group">
+                        <a href="https://github.com/LONEFORTS" target="_blank" class="btn btn-primary">GitHub</a>
+                        <a href="https://www.linkedin.com/in/ayush-lone-b017a2342" target="_blank" class="btn btn-secondary">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section (dynamically loaded from JS) -->
+        <section id="skills">
+            <div class="section-header">
+                <h2>Technical <span class="serif">Arsenal</span></h2>
+                <p>Click on any node to explore</p>
+            </div>
+            <div class="skills-grid" id="skillsGrid"></div>
+        </section>
+
+        <!-- Values Section -->
+        <section id="values">
+            <div class="section-header">
+                <h2>Core <span class="serif">Philosophy</span></h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-item"><h3>First‑Principles Thinking</h3><p>Engineering is deconstructing complex systems into fundamental truths.</p></div>
+                <div class="value-item"><h3>Technical Resilience</h3><p>Every roadblock is a data point. Build robust, scalable systems.</p></div>
+                <div class="value-item"><h3>Continuous Evolution</h3><p>Daily improvement – not just to keep pace, but to drive progress.</p></div>
+            </div>
+        </section>
+
+        <!-- Writing / GitHub Feed Section -->
+        <section id="writing">
+            <div class="section-header">
+                <h2>Recent <span class="serif">Projects</span></h2>
+                <p>Live from GitHub</p>
+            </div>
+            <div class="writing-grid" id="githubFeed"></div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="section-header">
+                <h2>Get in <span class="serif">Touch</span></h2>
+                <p>Technical collaborations & research opportunities</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-links">
+                    <a href="mailto:ayush@example.com" class="contact-link">Email</a>
+                    <a href="https://www.linkedin.com/in/ayush-lone-b017a2342" target="_blank" class="contact-link">LinkedIn</a>
+                    <a href="https://github.com/LONEFORTS" target="_blank" class="contact-link">GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <p class="footer-text">© 2025 Ayush Lone</p>
+            <p class="footer-text">Pune, India</p>
+        </div>
+    </footer>
+
+    <!-- Command palette overlay -->
+    <div id="commandPalette" class="command-palette hidden">
+        <div class="command-container">
+            <input type="text" id="commandInput" placeholder="Type a command... ( :skills, :dark, :light, :github )" autocomplete="off">
+            <div class="command-suggestions"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
+    <script type="module" src="js/three-network.js"></script>
+    <script type="module" src="js/github-feed.js"></script>
+    <script type="module" src="js/command-palette.js"></script>
+    <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
