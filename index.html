@@ -3,120 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Ayush Lone | Engineer & Researcher</title>
+    <title>Ayush Lone | AI Engineer & Researcher</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/skill-network.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 <body>
-    <!-- Neural Network Canvas (Three.js) -->
+    <!-- Neural Network Canvas -->
     <canvas id="skillNetworkCanvas" class="skill-network-canvas"></canvas>
 
     <!-- Navigation -->
-    <nav>
-        <div class="nav-content">
-            <a href="#" class="logo">AYUSH LONE</a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#values">Values</a>
-                <a href="#writing">Writing</a>
-                <a href="#contact">Contact</a>
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <a href="#home" class="nav-logo">AL</a>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-item">Home</a>
+                <a href="#about" class="nav-item">About</a>
+                <a href="#skills" class="nav-item">Skills</a>
+                <a href="#projects" class="nav-item">Projects</a>
+                <a href="#contact" class="nav-item">Contact</a>
             </div>
-            <button class="theme-toggle" id="themeToggle" aria-label="Dark/Light mode">🌙</button>
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
         </div>
     </nav>
 
-    <main class="container">
-        <!-- Hero Section -->
-        <section id="about" class="hero">
-            <div class="hero-grid">
-                <div class="hero-image">
-                    <img src="assets/images/hero.jpg" alt="Ayush Lone">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Ayush Lone</h1>
+                <p class="hero-subtitle">AI Engineer & Deep Learning Researcher</p>
+                <p class="hero-description">
+                    Crafting intelligent systems from first principles.
+                    Specializing in neural networks, ML architecture, and scalable AI solutions.
+                </p>
+                <div class="hero-cta">
+                    <a href="#skills" class="btn btn-primary">Explore Skills</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                 </div>
-                <div class="hero-text">
-                    <p class="motto">Not to Consume — But to Build</p>
-                    <h1>Ayush <span class="serif">Lone</span></h1>
-                    <p class="description">
-                        Computer Engineering student at YB Patil Polytechnic. 
-                        Engineer, Researcher, and Polymath focused on first‑principles AI/ML and Deep Learning systems.
-                    </p>
-                    <div class="cta-group">
-                        <a href="https://github.com/LONEFORTS" target="_blank" class="btn btn-primary">GitHub</a>
-                        <a href="https://www.linkedin.com/in/ayush-lone-b017a2342" target="_blank" class="btn btn-secondary">LinkedIn</a>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/hero.jpg" alt="Ayush Lone" />
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="section-container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a Computer Engineering student at YB Patil Polytechnic, passionate about building intelligent systems that solve real-world problems.</p>
+                    <p>My focus is on deep learning, neural network architectures, and full-stack AI development. I believe in understanding systems from first principles.</p>
+                    <p class="highlight">Currently exploring: Transformers, Graph Neural Networks, and Production ML Systems</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <h3>15+</h3>
+                        <p>Technologies Mastered</p>
+                    </div>
+                    <div class="stat">
+                        <h3>8+</h3>
+                        <p>AI/ML Projects</p>
+                    </div>
+                    <div class="stat">
+                        <h3>100%</h3>
+                        <p>Dedication</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Enhanced Skills Section with Neural Network -->
-        <section id="skills" class="skills-section">
-            <div class="section-header">
-                <h2>Technical <span class="serif">Arsenal</span></h2>
-                <p class="skills-description">Click on any node to explore connections. Watch the neural network flow of your expertise.</p>
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="section-container">
+            <h2 class="section-title">Interactive Skill Network</h2>
+            <p class="section-description">Click on any node to explore skill connections and dependencies</p>
+            <div class="network-info">
+                <p><strong>Tip:</strong> The 3D network shows how your skills interconnect. Each connection represents synergy and integration.</p>
             </div>
-            <div class="skills-info-box">
-                <p>🧠 <strong>Interactive Neural Network:</strong> Each node represents a skill. Lines show how skills interconnect and build upon each other. Click a skill to see its connections.</p>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Values Section -->
-        <section id="values">
-            <div class="section-header">
-                <h2>Core <span class="serif">Philosophy</span></h2>
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="section-container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects loaded from GitHub -->
             </div>
-            <div class="values-grid">
-                <div class="value-item"><h3>First‑Principles Thinking</h3><p>Engineering is deconstructing complex systems into fundamental truths.</p></div>
-                <div class="value-item"><h3>Technical Resilience</h3><p>Every roadblock is a data point. Build robust, scalable systems.</p></div>
-                <div class="value-item"><h3>Continuous Evolution</h3><p>Daily improvement – not just to keep pace, but to drive progress.</p></div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Writing / GitHub Feed Section -->
-        <section id="writing">
-            <div class="section-header">
-                <h2>Recent <span class="serif">Projects</span></h2>
-                <p>Live from GitHub</p>
-            </div>
-            <div class="writing-grid" id="githubFeed"></div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact">
-            <div class="section-header">
-                <h2>Get in <span class="serif">Touch</span></h2>
-                <p>Technical collaborations & research opportunities</p>
-            </div>
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="section-container">
+            <h2 class="section-title">Let's Connect</h2>
             <div class="contact-content">
+                <p>Interested in collaborating on AI/ML projects?</p>
                 <div class="contact-links">
-                    <a href="mailto:ayush@example.com" class="contact-link">Email</a>
-                    <a href="https://www.linkedin.com/in/ayush-lone-b017a2342" target="_blank" class="contact-link">LinkedIn</a>
-                    <a href="https://github.com/LONEFORTS" target="_blank" class="contact-link">GitHub</a>
+                    <a href="https://github.com/LONEFORTS" target="_blank" class="contact-btn">GitHub</a>
+                    <a href="https://www.linkedin.com/in/ayush-lone-b017a2342" target="_blank" class="contact-btn">LinkedIn</a>
+                    <a href="mailto:ayush@example.com" class="contact-btn">Email</a>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container footer-grid">
-            <p class="footer-text">© 2025 Ayush Lone</p>
-            <p class="footer-text">Pune, India</p>
         </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Ayush Lone. All rights reserved.</p>
+        <p class="footer-location">Pune, India</p>
     </footer>
-
-    <!-- Command palette overlay -->
-    <div id="commandPalette" class="command-palette hidden">
-        <div class="command-container">
-            <input type="text" id="commandInput" placeholder="Type a command... ( :skills, :dark, :light, :github )" autocomplete="off">
-            <div class="command-suggestions"></div>
-        </div>
-    </div>
 
     <!-- Scripts -->
     <script type="importmap">
@@ -127,9 +134,6 @@
         }
     </script>
     <script type="module" src="js/skill-network.js"></script>
-    <script type="module" src="js/github-feed.js"></script>
-    <script type="module" src="js/command-palette.js"></script>
-    <script type="module" src="js/theme.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
