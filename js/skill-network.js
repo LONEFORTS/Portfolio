@@ -1,362 +1,400 @@
+// Advanced Neural Network Skill Visualization with Cherry Blossom Theme
 import * as THREE from 'three';
 
-// ============================================
-// SKILL DATA WITH INTERCONNECTIONS
-// ============================================
-const skillsNetwork = {
+const skillsNetworkData = {
     nodes: [
-        { id: 'ai-ml', label: 'AI & ML', icon: '🧠', color: 0xff6b9d },
-        { id: 'python', label: 'Python', icon: '🐍', color: 0xc748ef },
-        { id: 'neural-nets', label: 'Neural Networks', icon: '🧬', color: 0x00d4ff },
-        { id: 'system-design', label: 'System Design', icon: '🏗️', color: 0xffd700 },
-        { id: 'research', label: 'Research', icon: '📊', color: 0x00ff88 },
-        { id: 'backend', label: 'Backend', icon: '⚙️', color: 0xff8c42 },
-        { id: 'frontend', label: 'Frontend', icon: '💻', color: 0x6366f1 },
-        { id: 'devops', label: 'DevOps', icon: '🚀', color: 0xff1493 },
-        { id: 'problem-solving', label: 'Problem Solving', icon: '🔧', color: 0x20b2aa },
-        { id: 'deep-learning', label: 'Deep Learning', icon: '⚡', color: 0xff6347 },
-        { id: 'data-science', label: 'Data Science', icon: '📈', color: 0x1e90ff }
+        { id: 'ai-ml', name: 'AI & ML', icon: '🧠', color: 0xff6b9d },
+        { id: 'python', name: 'Python', icon: '🐍', color: 0xffd93d },
+        { id: 'deeplearn', name: 'Deep Learning', icon: '🔮', color: 0xff6b9d },
+        { id: 'neural-nets', name: 'Neural Networks', icon: '⚡', color: 0xff6b9d },
+        { id: 'tensorflow', name: 'TensorFlow', icon: '🤖', color: 0xffd93d },
+        { id: 'pytorch', name: 'PyTorch', icon: '🔥', color: 0xffd93d },
+        { id: 'cv', name: 'Computer Vision', icon: '👁️', color: 0x6bcf7f },
+        { id: 'nlp', name: 'NLP', icon: '📝', color: 0x6bcf7f },
+        { id: 'data-science', name: 'Data Science', icon: '📊', color: 0x4d96ff },
+        { id: 'backend', name: 'Backend', icon: '⚙️', color: 0x9d4dff },
+        { id: 'frontend', name: 'Frontend', icon: '💻', color: 0x4d96ff },
+        { id: 'devops', name: 'DevOps', icon: '🚀', color: 0x9d4dff },
+        { id: 'algorithms', name: 'Algorithms', icon: '🧮', color: 0xff6b9d },
+        { id: 'databases', name: 'Databases', icon: '🗄️', color: 0x6bcf7f },
+        { id: 'system-design', name: 'System Design', icon: '🏗️', color: 0x4d96ff }
     ],
-    
-    // Connections represent skill relationships
     edges: [
         // AI/ML core connections
         { source: 'ai-ml', target: 'python' },
+        { source: 'ai-ml', target: 'deeplearn' },
         { source: 'ai-ml', target: 'neural-nets' },
-        { source: 'ai-ml', target: 'deep-learning' },
         { source: 'ai-ml', target: 'data-science' },
-        { source: 'ai-ml', target: 'research' },
-        
-        // Neural Networks connections
-        { source: 'neural-nets', target: 'deep-learning' },
-        { source: 'neural-nets', target: 'python' },
-        { source: 'neural-nets', target: 'system-design' },
-        
-        // Python connections
-        { source: 'python', target: 'backend' },
-        { source: 'python', target: 'data-science' },
-        { source: 'python', target: 'problem-solving' },
-        
-        // System Design connections
-        { source: 'system-design', target: 'backend' },
-        { source: 'system-design', target: 'devops' },
-        { source: 'system-design', target: 'frontend' },
-        
-        // Research connections
-        { source: 'research', target: 'data-science' },
-        { source: 'research', target: 'deep-learning' },
-        
-        // Backend connections
-        { source: 'backend', target: 'devops' },
-        { source: 'backend', target: 'problem-solving' },
-        
-        // Frontend connections
-        { source: 'frontend', target: 'problem-solving' },
         
         // Deep Learning connections
-        { source: 'deep-learning', target: 'data-science' },
-        { source: 'deep-learning', target: 'system-design' }
+        { source: 'deeplearn', target: 'tensorflow' },
+        { source: 'deeplearn', target: 'pytorch' },
+        { source: 'deeplearn', target: 'neural-nets' },
+        { source: 'deeplearn', target: 'cv' },
+        { source: 'deeplearn', target: 'nlp' },
+        
+        // Neural Networks
+        { source: 'neural-nets', target: 'algorithms' },
+        { source: 'neural-nets', target: 'tensorflow' },
+        { source: 'neural-nets', target: 'pytorch' },
+        
+        // Frameworks
+        { source: 'tensorflow', target: 'python' },
+        { source: 'pytorch', target: 'python' },
+        
+        // Computer Vision & NLP
+        { source: 'cv', target: 'python' },
+        { source: 'cv', target: 'data-science' },
+        { source: 'nlp', target: 'python' },
+        { source: 'nlp', target: 'data-science' },
+        
+        // Data Science connections
+        { source: 'data-science', target: 'databases' },
+        { source: 'data-science', target: 'backend' },
+        
+        // Backend/Frontend
+        { source: 'backend', target: 'databases' },
+        { source: 'backend', target: 'system-design' },
+        { source: 'backend', target: 'devops' },
+        { source: 'frontend', target: 'system-design' },
+        
+        // DevOps
+        { source: 'devops', target: 'system-design' },
+        
+        // General algorithms
+        { source: 'algorithms', target: 'python' },
+        { source: 'algorithms', target: 'backend' }
     ]
 };
 
-// ============================================
-// NEURAL NETWORK VISUALIZATION
-// ============================================
-export class SkillNetworkVisualizer {
-    constructor(containerId) {
-        this.container = document.getElementById(containerId);
-        if (!this.container) return;
-        
-        this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x050505);
-        this.camera = new THREE.PerspectiveCamera(
-            60,
-            this.container.clientWidth / this.container.clientHeight,
-            0.1,
-            10000
-        );
-        this.camera.position.z = 100;
-        
-        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.container.appendChild(this.renderer.domElement);
-        
-        this.nodes = [];
-        this.edges = [];
-        this.nodeMap = new Map();
-        this.selectedNode = null;
-        this.highlightedEdges = [];
-        
-        this.init();
-        this.animate();
-        
-        // Handle window resize
-        window.addEventListener('resize', () => this.onWindowResize());
-    }
-    
-    init() {
-        // Create nodes using cherry blossom petal distribution (mathematical)
-        this.createNodes();
-        
-        // Create edges
-        this.createEdges();
-        
-        // Add lights
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-        this.scene.add(ambientLight);
-        
-        const pointLight = new THREE.PointLight(0xffffff, 1);
-        pointLight.position.set(100, 100, 100);
-        this.scene.add(pointLight);
-        
-        // Add raycaster for mouse interactions
-        this.raycaster = new THREE.Raycaster();
-        this.mouse = new THREE.Vector2();
-        
-        window.addEventListener('click', (e) => this.onMouseClick(e));
-    }
-    
-    createNodes() {
-        // Position nodes using parametric equations inspired by cherry blossom patterns
-        const nodeCount = skillsNetwork.nodes.length;
-        
-        skillsNetwork.nodes.forEach((skillData, index) => {
-            // Use mathematical spiral + petal distribution
-            const angle = (index / nodeCount) * Math.PI * 2;
-            const radius = 30 + Math.sin(angle * 3) * 10;
-            const x = Math.cos(angle) * radius;
-            const y = Math.sin(angle * 1.5) * 20;
-            const z = Math.cos(angle * 2) * 15;
-            
-            // Create node sphere
-            const geometry = new THREE.SphereGeometry(3, 32, 32);
-            const material = new THREE.MeshStandardMaterial({
-                color: skillData.color,
-                emissive: skillData.color,
-                emissiveIntensity: 0.4,
-                metalness: 0.6,
-                roughness: 0.4
-            });
-            
-            const sphere = new THREE.Mesh(geometry, material);
-            sphere.position.set(x, y, z);
-            sphere.userData.skillId = skillData.id;
-            sphere.userData.skillLabel = skillData.label;
-            sphere.userData.originalColor = skillData.color;
-            
-            // Create glow effect
-            const glowGeometry = new THREE.SphereGeometry(3.3, 32, 32);
-            const glowMaterial = new THREE.MeshBasicMaterial({
-                color: skillData.color,
-                transparent: true,
-                opacity: 0.1
-            });
-            const glow = new THREE.Mesh(glowGeometry, glowMaterial);
-            sphere.add(glow);
-            
-            this.scene.add(sphere);
-            this.nodes.push(sphere);
-            this.nodeMap.set(skillData.id, sphere);
-        });
-    }
-    
-    createEdges() {
-        skillsNetwork.edges.forEach(edgeData => {
-            const sourceNode = this.nodeMap.get(edgeData.source);
-            const targetNode = this.nodeMap.get(edgeData.target);
-            
-            if (sourceNode && targetNode) {
-                const points = [
-                    sourceNode.position.clone(),
-                    targetNode.position.clone()
-                ];
-                
-                const geometry = new THREE.BufferGeometry().setFromPoints(points);
-                const material = new THREE.LineBasicMaterial({
-                    color: 0x666666,
-                    transparent: true,
-                    opacity: 0.2,
-                    linewidth: 2
-                });
-                
-                const line = new THREE.Line(geometry, material);
-                line.userData.source = edgeData.source;
-                line.userData.target = edgeData.target;
-                
-                this.scene.add(line);
-                this.edges.push(line);
-            }
-        });
-    }
-    
-    onMouseClick(event) {
-        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        
-        this.raycaster.setFromCamera(this.mouse, this.camera);
-        const intersects = this.raycaster.intersectObjects(this.nodes);
-        
-        if (intersects.length > 0) {
-            const selected = intersects[0].object;
-            this.selectNode(selected);
-        }
-    }
-    
-    selectNode(node) {
-        // Deselect previous
-        if (this.selectedNode) {
-            this.selectedNode.material.emissiveIntensity = 0.4;
-            this.clearHighlights();
-        }
-        
-        this.selectedNode = node;
-        node.material.emissiveIntensity = 1;
-        
-        // Highlight connected edges
-        this.highlightConnections(node.userData.skillId);
-        this.showSkillInfo(node);
-    }
-    
-    highlightConnections(skillId) {
-        this.highlightedEdges = [];
-        
-        this.edges.forEach(edge => {
-            if (edge.userData.source === skillId || edge.userData.target === skillId) {
-                edge.material.opacity = 0.8;
-                edge.material.color.set(0xffff00);
-                this.highlightedEdges.push(edge);
-                
-                // Also highlight connected nodes
-                const connectedId = edge.userData.source === skillId 
-                    ? edge.userData.target 
-                    : edge.userData.source;
-                const connectedNode = this.nodeMap.get(connectedId);
-                if (connectedNode) {
-                    connectedNode.material.emissiveIntensity = 0.8;
-                }
-            }
-        });
-    }
-    
-    clearHighlights() {
-        this.edges.forEach(edge => {
-            edge.material.opacity = 0.2;
-            edge.material.color.set(0x666666);
-        });
-        
-        this.nodes.forEach(node => {
-            if (node !== this.selectedNode) {
-                node.material.emissiveIntensity = 0.4;
-            }
-        });
-        
-        this.highlightedEdges = [];
-    }
-    
-    showSkillInfo(node) {
-        // Create/update skill info modal
-        let modal = document.getElementById('skillModal');
-        if (!modal) {
-            modal = document.createElement('div');
-            modal.id = 'skillModal';
-            modal.className = 'skill-modal';
-            document.body.appendChild(modal);
-        }
-        
-        const skillId = node.userData.skillId;
-        const skillData = skillsNetwork.nodes.find(n => n.id === skillId);
-        
-        // Get connected skills
-        const connected = skillsNetwork.edges
-            .filter(e => e.source === skillId || e.target === skillId)
-            .map(e => e.source === skillId ? e.target : e.source)
-            .map(id => skillsNetwork.nodes.find(n => n.id === id));
-        
-        modal.innerHTML = `
-            <div class="skill-modal-content">
-                <span class="skill-modal-close">&times;</span>
-                <h2>${skillData.icon} ${skillData.label}</h2>
-                <p class="skill-description">${this.getSkillDescription(skillId)}</p>
-                ${connected.length > 0 ? `
-                    <div class="connected-skills">
-                        <h3>Connected Skills</h3>
-                        <div class="connected-list">
-                            ${connected.map(s => `
-                                <div class="connected-item">
-                                    <span>${s.icon}</span> ${s.label}
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                ` : ''}
-            </div>
-        `;
-        
-        modal.classList.add('active');
-        modal.querySelector('.skill-modal-close').addEventListener('click', () => {
-            modal.classList.remove('active');
-            this.clearHighlights();
-            this.selectedNode.material.emissiveIntensity = 0.4;
-            this.selectedNode = null;
-        });
-    }
-    
-    getSkillDescription(skillId) {
-        const descriptions = {
-            'ai-ml': 'Artificial Intelligence and Machine Learning systems, including supervised/unsupervised learning paradigms.',
-            'python': 'Primary programming language for data science, ML, and backend development.',
-            'neural-nets': 'Artificial neural networks design and implementation for pattern recognition.',
-            'system-design': 'Large-scale system architecture, scalability, and distributed systems design.',
-            'research': 'Technical research, paper analysis, and academic methodology.',
-            'backend': 'Server-side development, APIs, and database architecture.',
-            'frontend': 'Web UI/UX design and interactive user experience engineering.',
-            'devops': 'Deployment pipelines, containerization, and infrastructure automation.',
-            'problem-solving': 'Algorithm design, complexity analysis, and computational problem-solving.',
-            'deep-learning': 'Deep neural networks, CNNs, RNNs, and advanced learning architectures.',
-            'data-science': 'Statistical analysis, data visualization, and exploratory data analysis.'
-        };
-        return descriptions[skillId] || 'Expert-level proficiency in this domain.';
-    }
-    
-    animate() {
-        requestAnimationFrame(() => this.animate());
-        
-        const time = Date.now() * 0.0005;
-        
-        // Gentle rotation
-        this.scene.rotation.x += 0.0001;
-        this.scene.rotation.y += 0.0003;
-        
-        // Pulsating glow for nodes
-        this.nodes.forEach((node, idx) => {
-            const pulse = Math.sin(time + idx * 0.3) * 0.3 + 0.7;
-            node.children[0].material.opacity = pulse * 0.1;
-            
-            // Cherry blossom-like floating motion
-            if (!this.selectedNode || node !== this.selectedNode) {
-                const floatAmount = Math.sin(time * 0.5 + idx) * 0.5;
-                node.position.y += floatAmount * 0.01;
-            }
-        });
-        
-        this.renderer.render(this.scene, this.camera);
-    }
-    
-    onWindowResize() {
-        const width = this.container.clientWidth;
-        const height = this.container.clientHeight;
-        
-        this.camera.aspect = width / height;
-        this.camera.updateProjectionMatrix();
-        this.renderer.setSize(width, height);
-    }
-}
+// Create Three.js scene
+const canvas = document.getElementById('skillNetworkCanvas');
+if (!canvas) console.error('Canvas not found');
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    const skillVisContainer = document.getElementById('skillNetworkContainer');
-    if (skillVisContainer) {
-        new SkillNetworkVisualizer('skillNetworkContainer');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x050505);
+scene.fog = new THREE.Fog(0x050505, 30, 100);
+
+const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+);
+camera.position.z = 20;
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.shadowMap.enabled = true;
+
+// Lighting with cherry blossom aesthetic
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xff6b9d, 0.6);
+directionalLight.position.set(10, 10, 5);
+directionalLight.castShadow = true;
+scene.add(directionalLight);
+
+const pointLight1 = new THREE.PointLight(0x4d96ff, 0.4);
+pointLight1.position.set(-10, 5, 8);
+scene.add(pointLight1);
+
+const pointLight2 = new THREE.PointLight(0x6bcf7f, 0.3);
+pointLight2.position.set(10, -5, 8);
+scene.add(pointLight2);
+
+// Create nodes map
+const nodesMesh = {};
+const nodePositions = {};
+const nodeGroup = new THREE.Group();
+scene.add(nodeGroup);
+
+// Distribute nodes in 3D space using force-directed layout
+const createNodes = () => {
+    const positions = {};
+    
+    // Initialize random positions
+    skillsNetworkData.nodes.forEach((nodeData, idx) => {
+        const angle = (idx / skillsNetworkData.nodes.length) * Math.PI * 2;
+        const radius = 8 + Math.random() * 3;
+        const x = Math.cos(angle) * radius;
+        const y = (Math.random() - 0.5) * 10;
+        const z = Math.sin(angle) * radius;
+        positions[nodeData.id] = new THREE.Vector3(x, y, z);
+    });
+    
+    // Apply spring physics for better distribution
+    for (let iter = 0; iter < 50; iter++) {
+        skillsNetworkData.nodes.forEach((nodeData) => {
+            const pos = positions[nodeData.id];
+            const forces = new THREE.Vector3(0, 0, 0);
+            
+            // Repulsion from other nodes
+            skillsNetworkData.nodes.forEach((other) => {
+                if (other.id !== nodeData.id) {
+                    const otherPos = positions[other.id];
+                    const diff = pos.clone().sub(otherPos);
+                    const dist = Math.max(diff.length(), 0.1);
+                    diff.normalize().multiplyScalar(1 / (dist * 0.5));
+                    forces.add(diff);
+                }
+            });
+            
+            // Attraction along edges
+            skillsNetworkData.edges.forEach((edge) => {
+                if (edge.source === nodeData.id) {
+                    const targetPos = positions[edge.target];
+                    const diff = targetPos.clone().sub(pos);
+                    diff.multiplyScalar(0.01);
+                    forces.add(diff);
+                } else if (edge.target === nodeData.id) {
+                    const sourcePos = positions[edge.source];
+                    const diff = sourcePos.clone().sub(pos);
+                    diff.multiplyScalar(0.01);
+                    forces.add(diff);
+                }
+            });
+            
+            // Damping and update
+            forces.multiplyScalar(0.1);
+            pos.add(forces);
+        });
+    }
+    
+    // Create mesh nodes
+    skillsNetworkData.nodes.forEach((nodeData) => {
+        const geometry = new THREE.IcosahedronGeometry(0.5, 4);
+        const material = new THREE.MeshStandardMaterial({
+            color: nodeData.color,
+            metalness: 0.6,
+            roughness: 0.3,
+            emissive: new THREE.Color(nodeData.color).multiplyScalar(0.3)
+        });
+        
+        const mesh = new THREE.Mesh(geometry, material);
+        const pos = positions[nodeData.id];
+        mesh.position.copy(pos);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        mesh.userData = { skillId: nodeData.id, skillName: nodeData.name, skillIcon: nodeData.icon };
+        
+        nodeGroup.add(mesh);
+        nodesMesh[nodeData.id] = mesh;
+        nodePositions[nodeData.id] = pos.clone();
+    });
+};
+
+createNodes();
+
+// Create edges (connections)
+const edgeGroup = new THREE.Group();
+scene.add(edgeGroup);
+
+const edgeMeshes = {};
+
+const createEdges = () => {
+    skillsNetworkData.edges.forEach((edge, idx) => {
+        const sourcePos = nodePositions[edge.source];
+        const targetPos = nodePositions[edge.target];
+        
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(
+            new Float32Array([
+                sourcePos.x, sourcePos.y, sourcePos.z,
+                targetPos.x, targetPos.y, targetPos.z
+            ]),
+            3
+        ));
+        
+        const material = new THREE.LineBasicMaterial({
+            color: 0xff6b9d,
+            transparent: true,
+            opacity: 0.2,
+            linewidth: 2
+        });
+        
+        const line = new THREE.Line(geometry, material);
+        edgeGroup.add(line);
+        edgeMeshes[`${edge.source}-${edge.target}`] = { line, edge };
+    });
+};
+
+createEdges();
+
+// Interactive selection and highlighting
+let selectedNode = null;
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+const highlightConnections = (nodeId) => {
+    // Reset all edges
+    Object.values(edgeMeshes).forEach(({ line }) => {
+        line.material.opacity = 0.15;
+        line.material.color.setHex(0xff6b9d);
+    });
+    
+    // Reset all nodes
+    Object.values(nodesMesh).forEach((mesh) => {
+        mesh.material.emissive.copy(new THREE.Color(mesh.material.color).multiplyScalar(0.3));
+    });
+    
+    if (nodeId === null) return;
+    
+    // Highlight connected nodes and edges
+    const connectedNodes = new Set([nodeId]);
+    skillsNetworkData.edges.forEach((edge) => {
+        if (edge.source === nodeId) {
+            connectedNodes.add(edge.target);
+        } else if (edge.target === nodeId) {
+            connectedNodes.add(edge.source);
+        }
+    });
+    
+    // Highlight connected nodes
+    connectedNodes.forEach((nId) => {
+        const mesh = nodesMesh[nId];
+        if (mesh) {
+            mesh.material.emissive.copy(new THREE.Color(mesh.material.color));
+            mesh.scale.set(1.3, 1.3, 1.3);
+        }
+    });
+    
+    // Highlight connected edges
+    skillsNetworkData.edges.forEach((edge) => {
+        const key = `${edge.source}-${edge.target}`;
+        if (connectedNodes.has(edge.source) && connectedNodes.has(edge.target)) {
+            edgeMeshes[key].line.material.opacity = 0.8;
+            edgeMeshes[key].line.material.color.setHex(0xff6b9d);
+        }
+    });
+};
+
+window.addEventListener('click', (event) => {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(nodeGroup.children);
+    
+    if (intersects.length > 0) {
+        const clickedMesh = intersects[0].object;
+        selectedNode = clickedMesh.userData.skillId;
+        highlightConnections(selectedNode);
+        
+        // Show skill details
+        showSkillDetails(clickedMesh.userData);
+    } else {
+        selectedNode = null;
+        highlightConnections(null);
+        hideSkillDetails();
     }
 });
+
+// Skill details panel
+const showSkillDetails = (skillData) => {
+    let panel = document.getElementById('skillDetailsPanel');
+    if (!panel) {
+        panel = document.createElement('div');
+        panel.id = 'skillDetailsPanel';
+        panel.className = 'skill-details-panel';
+        document.body.appendChild(panel);
+    }
+    
+    const connectedSkills = [];
+    skillsNetworkData.edges.forEach((edge) => {
+        if (edge.source === skillData.skillId) {
+            const connected = skillsNetworkData.nodes.find(n => n.id === edge.target);
+            if (connected) connectedSkills.push(connected);
+        } else if (edge.target === skillData.skillId) {
+            const connected = skillsNetworkData.nodes.find(n => n.id === edge.source);
+            if (connected) connectedSkills.push(connected);
+        }
+    });
+    
+    panel.innerHTML = `
+        <div class="skill-details-content">
+            <button class="close-btn" onclick="document.getElementById('skillDetailsPanel').style.display='none'">✕</button>
+            <h2>${skillData.skillIcon} ${skillData.skillName}</h2>
+            <div class="connected-skills">
+                <h3>Connected Skills (${connectedSkills.length})</h3>
+                <div class="skills-list">
+                    ${connectedSkills.map(skill => `
+                        <div class="skill-link">
+                            <span>${skill.icon}</span>
+                            <span>${skill.name}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    panel.style.display = 'block';
+};
+
+const hideSkillDetails = () => {
+    const panel = document.getElementById('skillDetailsPanel');
+    if (panel) panel.style.display = 'none';
+};
+
+// Mouse move for subtle camera interaction
+let mouseX = 0, mouseY = 0;
+window.addEventListener('mousemove', (event) => {
+    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+    mouseY = (event.clientY / window.innerHeight) * 2 - 1;
+});
+
+// Animation loop
+const startTime = Date.now();
+let nodes_reference = nodeGroup.children;
+
+function animate() {
+    requestAnimationFrame(animate);
+    
+    const elapsed = (Date.now() - startTime) * 0.001;
+    
+    // Gentle rotation based on mouse
+    nodeGroup.rotation.x += (mouseY * 0.5 - nodeGroup.rotation.x) * 0.05;
+    nodeGroup.rotation.y += (mouseX * 0.5 - nodeGroup.rotation.y) * 0.05;
+    
+    // Pulsing animation for nodes
+    Object.values(nodesMesh).forEach((mesh, idx) => {
+        const originalScale = mesh.userData.skillId === selectedNode ? 1.3 : 1;
+        const pulse = 1 + Math.sin(elapsed * 2 + idx * 0.3) * 0.1;
+        mesh.scale.set(originalScale * pulse, originalScale * pulse, originalScale * pulse);
+    });
+    
+    // Update edge positions for smooth animation
+    Object.values(edgeMeshes).forEach(({ line, edge }) => {
+        const sourcePos = nodePositions[edge.source];
+        const targetPos = nodePositions[edge.target];
+        
+        const positions = line.geometry.attributes.position.array;
+        positions[0] = sourcePos.x;
+        positions[1] = sourcePos.y;
+        positions[2] = sourcePos.z;
+        positions[3] = targetPos.x;
+        positions[4] = targetPos.y;
+        positions[5] = targetPos.z;
+        line.geometry.attributes.position.needsUpdate = true;
+    });
+    
+    renderer.render(scene, camera);
+}
+
+animate();
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Expose for debugging
+window.skillNetwork = {
+    scene,
+    nodesMesh,
+    highlightConnections
+};

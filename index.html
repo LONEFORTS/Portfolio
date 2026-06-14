@@ -8,11 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/skill-network.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 <body>
-    <!-- 3D Canvas (Three.js) -->
-    <canvas id="bgCanvas" class="three-canvas"></canvas>
+    <!-- Neural Network Canvas (Three.js) -->
+    <canvas id="skillNetworkCanvas" class="skill-network-canvas"></canvas>
 
     <!-- Navigation -->
     <nav>
@@ -54,13 +55,15 @@
             </div>
         </section>
 
-        <!-- Skills Section (dynamically loaded from JS) -->
-        <section id="skills">
+        <!-- Enhanced Skills Section with Neural Network -->
+        <section id="skills" class="skills-section">
             <div class="section-header">
                 <h2>Technical <span class="serif">Arsenal</span></h2>
-                <p>Click on any node to explore</p>
+                <p class="skills-description">Click on any node to explore connections. Watch the neural network flow of your expertise.</p>
             </div>
-            <div class="skills-grid" id="skillsGrid"></div>
+            <div class="skills-info-box">
+                <p>🧠 <strong>Interactive Neural Network:</strong> Each node represents a skill. Lines show how skills interconnect and build upon each other. Click a skill to see its connections.</p>
+            </div>
         </section>
 
         <!-- Values Section -->
@@ -123,7 +126,7 @@
             }
         }
     </script>
-    <script type="module" src="js/three-network.js"></script>
+    <script type="module" src="js/skill-network.js"></script>
     <script type="module" src="js/github-feed.js"></script>
     <script type="module" src="js/command-palette.js"></script>
     <script type="module" src="js/theme.js"></script>

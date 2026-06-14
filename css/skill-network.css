@@ -1,0 +1,191 @@
+/* Neural Network Skill Visualization Styles */
+
+#skillNetworkCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+}
+
+.skill-details-panel {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: rgba(5, 5, 5, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 107, 157, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 400px;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 20px 60px rgba(255, 107, 157, 0.15);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skill-details-content {
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(255, 107, 157, 0.2);
+    color: #ff6b9d;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 107, 157, 0.4);
+    transform: rotate(90deg);
+}
+
+.skill-details-panel h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skill-details-panel h3 {
+    font-size: 1rem;
+    color: #ff6b9d;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.connected-skills {
+    margin-top: 1.5rem;
+}
+
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.skill-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 107, 157, 0.1);
+    border: 1px solid rgba(255, 107, 157, 0.2);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.skill-link:hover {
+    background: rgba(255, 107, 157, 0.2);
+    border-color: rgba(255, 107, 157, 0.5);
+    transform: translateX(5px);
+}
+
+.skill-link span:first-child {
+    font-size: 1.2rem;
+}
+
+/* Network info overlay */
+.network-info {
+    position: fixed;
+    top: 100px;
+    left: 2rem;
+    background: rgba(5, 5, 5, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 107, 157, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    max-width: 300px;
+    z-index: 100;
+    color: #ffffff;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.network-info h3 {
+    color: #ff6b9d;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* Gradient text for skill names */
+.gradient-text {
+    background: linear-gradient(135deg, #ff6b9d, #4d96ff, #6bcf7f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .skill-details-panel {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        max-width: none;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+    
+    .network-info {
+        top: 100px;
+        left: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+}
+
+/* Theme support */
+body.light {
+    --skill-bg: #f5f5f7;
+    --skill-text: #111111;
+    --skill-border: rgba(255, 107, 157, 0.2);
+}
+
+body.light .skill-details-panel {
+    background: rgba(245, 245, 247, 0.95);
+    border: 1px solid rgba(255, 107, 157, 0.3);
+}
+
+body.light .skill-details-panel h2 {
+    color: #111111;
+}
+
+body.light .skill-link {
+    background: rgba(255, 107, 157, 0.08);
+    color: #111111;
+    border-color: rgba(255, 107, 157, 0.2);
+}
+
+body.light .skill-link:hover {
+    background: rgba(255, 107, 157, 0.15);
+}

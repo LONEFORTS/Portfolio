@@ -7,6 +7,10 @@
     --card-bg: #0a0a0a;
     --accent: #ffffff;
     --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    --cherry-pink: #ff6b9d;
+    --sky-blue: #4d96ff;
+    --forest-green: #6bcf7f;
+    --golden: #ffd93d;
 }
 
 body.light {
@@ -38,14 +42,14 @@ body {
 }
 
 /* Three.js canvas */
-.three-canvas {
+.skill-network-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 0;
-    pointer-events: none;
+    pointer-events: auto;
 }
 
 .container {
@@ -59,6 +63,9 @@ body {
 section {
     padding: 8rem 0;
     border-bottom: 1px solid var(--border);
+    background: rgba(var(--bg-rgb), 0.7);
+    backdrop-filter: blur(10px);
+    margin-bottom: 4rem;
 }
 
 h1, h2, h3 {
@@ -80,7 +87,7 @@ p {
 nav {
     position: fixed;
     width: 100%;
-    background: rgba(var(--bg-rgb), 0.8);
+    background: rgba(var(--bg-rgb), 0.85);
     backdrop-filter: blur(12px);
     z-index: 100;
     border-bottom: 1px solid var(--border);
@@ -101,6 +108,10 @@ nav {
     letter-spacing: 0.15em;
     text-decoration: none;
     color: var(--text);
+    background: linear-gradient(135deg, var(--cherry-pink), var(--sky-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .nav-links {
@@ -118,7 +129,7 @@ nav {
 }
 
 .nav-links a:hover, .nav-links a.active {
-    color: var(--text);
+    color: var(--cherry-pink);
 }
 
 .theme-toggle, .hamburger {
@@ -148,6 +159,8 @@ nav {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    padding-top: 80px;
+    background: rgba(var(--bg-rgb), 0.5) !important;
 }
 
 .hero-grid {
@@ -160,8 +173,10 @@ nav {
 .hero-image {
     aspect-ratio: 3/4;
     background: var(--card-bg);
-    border: 1px solid var(--border);
+    border: 2px solid rgba(255, 107, 157, 0.3);
     overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(255, 107, 157, 0.1);
 }
 
 .hero-image img {
@@ -180,13 +195,28 @@ nav {
     font-size: 4.5rem;
     line-height: 0.95;
     margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #ff6b9d, #4d96ff, #6bcf7f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .motto {
     font-size: 0.9rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--text);
+    color: var(--cherry-pink);
+}
+
+.description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.cta-group {
+    display: flex;
+    gap: 1rem;
 }
 
 .btn {
@@ -196,49 +226,67 @@ nav {
     font-weight: 600;
     font-size: 0.8rem;
     text-transform: uppercase;
-    border: 1px solid var(--border);
+    border: 2px solid var(--cherry-pink);
     transition: var(--transition);
+    border-radius: 8px;
 }
 
 .btn-primary {
-    background: var(--text);
+    background: var(--cherry-pink);
     color: var(--bg);
-    border-color: var(--text);
 }
 
 .btn-primary:hover {
     background: transparent;
-    color: var(--text);
+    color: var(--cherry-pink);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--cherry-pink);
 }
 
 .btn-secondary:hover {
-    border-color: var(--text);
+    background: rgba(255, 107, 157, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
 }
 
-/* Skills Grid */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 2rem;
+/* Skills Section */
+.skills-section {
+    position: relative;
+    z-index: 50;
 }
 
-.skill-node {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    padding: 2rem;
-    text-align: center;
-    cursor: pointer;
-    transition: var(--transition);
+.section-header {
+    margin-bottom: 3rem;
 }
 
-.skill-node:hover {
-    transform: translateY(-5px);
-    border-color: var(--text);
-}
-
-.skill-node .icon {
-    font-size: 2.5rem;
+.section-header h2 {
+    font-size: 3rem;
     margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.skills-description {
+    color: var(--cherry-pink);
+    font-weight: 500;
+}
+
+.skills-info-box {
+    background: rgba(255, 107, 157, 0.05);
+    border: 1px solid rgba(255, 107, 157, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
 }
 
 /* Values & Writing */
@@ -254,11 +302,13 @@ nav {
     padding: 2rem;
     text-decoration: none;
     transition: var(--transition);
+    border-radius: 12px;
 }
 
 .writing-card:hover {
     transform: translateY(-5px);
-    border-color: var(--text);
+    border-color: var(--cherry-pink);
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.1);
 }
 
 .writing-card h3 {
@@ -270,10 +320,17 @@ nav {
     background: var(--card-bg);
     border: 1px solid var(--border);
     padding: 2rem;
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.value-item:hover {
+    border-color: var(--cherry-pink);
+    background: rgba(255, 107, 157, 0.05);
 }
 
 .value-item h3 {
-    color: var(--text);
+    color: var(--cherry-pink);
     margin-bottom: 1rem;
 }
 
@@ -290,15 +347,16 @@ nav {
 
 .contact-link {
     font-size: 2rem;
-    color: var(--text);
+    color: var(--cherry-pink);
     text-decoration: none;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--cherry-pink);
     transition: var(--transition);
     padding-bottom: 0.5rem;
 }
 
 .contact-link:hover {
-    border-color: var(--text);
+    color: var(--sky-blue);
+    border-color: var(--sky-blue);
     padding-left: 0.5rem;
 }
 
@@ -308,6 +366,8 @@ footer {
     border-top: 1px solid var(--border);
     padding: 2rem;
     text-align: center;
+    position: relative;
+    z-index: 10;
 }
 
 .footer-grid {
@@ -390,6 +450,7 @@ footer {
         flex-direction: column;
         padding: 2rem;
         border-bottom: 1px solid var(--border);
+        z-index: 99;
     }
 
     .nav-links.active {
@@ -408,5 +469,9 @@ footer {
     .footer-grid {
         flex-direction: column;
         gap: 1rem;
+    }
+    
+    section {
+        padding: 4rem 0;
     }
 }
